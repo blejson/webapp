@@ -1,4 +1,7 @@
 package com.blejson.webapp.repositories;
 
-public interface AuthorRepository {
+import com.blejson.webapp.domain.Author;
+import org.springframework.data.repository.CrudRepository;
+
+public interface AuthorRepository extends CrudRepository<Author, Long> {
 }
