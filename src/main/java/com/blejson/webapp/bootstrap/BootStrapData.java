@@ -3,9 +3,11 @@ package com.blejson.webapp.bootstrap;
 import com.blejson.webapp.domain.Author;
 import com.blejson.webapp.domain.Book;
 import com.blejson.webapp.domain.Publisher;
+import com.blejson.webapp.domain.User;
 import com.blejson.webapp.repositories.AuthorRepository;
 import com.blejson.webapp.repositories.BookRepository;
 import com.blejson.webapp.repositories.PublisherRepository;
+import com.blejson.webapp.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -15,11 +17,13 @@ public class BootStrapData implements CommandLineRunner {
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
     private final PublisherRepository publisherRepository;
+    private final UserRepository userRepository;
 
-    public BootStrapData(AuthorRepository authorRepository, BookRepository bookRepository, PublisherRepository publisherRepository) {
+    public BootStrapData(AuthorRepository authorRepository, BookRepository bookRepository, PublisherRepository publisherRepository, UserRepository userRepository) {
         this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
         this.publisherRepository = publisherRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -29,6 +33,9 @@ public class BootStrapData implements CommandLineRunner {
         publisher.setCity("St Petersburg");
         publisher.setState("FL");
 
+        User admin = new User("admin","admin", "ADMIN");
+        admin.setActive(true);
+        userRepository.save(admin);
         publisherRepository.save(publisher);
 
         Author eric = new Author("Eric", "Evans");

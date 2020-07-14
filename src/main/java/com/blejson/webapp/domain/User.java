@@ -14,12 +14,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
+    private String userName;
     private String password;
     private String role;
+    private boolean active;
 
-    public User(String name, String password, String role) {
-        this.name = name;
+    public User() {
+    }
+
+    public User(String userName, String password, String role) {
+        this.userName = userName;
         this.password = password;
         this.role = role;
     }
@@ -28,7 +32,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
                 '}';
@@ -49,6 +53,14 @@ public class User {
         return id != null ? id.hashCode() : 0;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     public Long getId() {
         return id;
     }
@@ -57,12 +69,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setuserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
