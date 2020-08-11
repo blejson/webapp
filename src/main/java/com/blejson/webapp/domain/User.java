@@ -18,14 +18,15 @@ public class User {
     private String password;
     private String role;
     private boolean active;
-
+    private String email;
     public User() {
     }
 
-    public User(String userName, String password, String role) {
+    public User(String userName, String password, String role, String email) {
         this.userName = userName;
         this.password = password;
         this.role = role;
+        this.email = email;
     }
 
     @Override
@@ -91,5 +92,9 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }
