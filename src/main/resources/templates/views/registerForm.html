@@ -2,24 +2,23 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Register Form</title>
+    <title>Rejestracja</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
 <h3>Witam państwa</h3>
 <h2>Tutaj będzie rejestracja</h2>
+<div class="alert alert-info" th:if="${exists}"><p class="text text-center">User already exists</p></div>
 <form th:action="@{/register}" th:object="${user}" method="post">
     <div class="form-group">
-        <label for="email" class="form-control-label">Email</label>
-        <input type="text" class="form-control" th:field="*{email}" id="email"/>
+        <label for="userName" class="form-control-label">Name</label>
+        <input type="text" class="form-control" th:field="*{userName}" id="userName"/>
+        <div class="text text-ganger" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></div>
     </div>
     <div class="form-group">
         <label for="password" class="form-control-label">Password</label>
         <input type="password" class="form-control" th:field="*{password}" id="password"/>
-    </div>
-    <div class="form-group">
-        <label for="userName" class="form-control-label">Name</label>
-        <input type="text" class="form-control" th:field="*{userName}" id="userName"/>
+        <div class="text text-ganger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
     </div>
     <input type="submit" value="Submit" class="btn btn-primary"/>
 </form>

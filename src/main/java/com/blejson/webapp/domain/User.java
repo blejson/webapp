@@ -1,9 +1,6 @@
 package com.blejson.webapp.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by Blejson on 14.07.2020
@@ -13,20 +10,18 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    @Column(unique = true)
     private String userName;
     private String password;
     private String role;
     private boolean active;
-    private String email;
     public User() {
     }
 
-    public User(String userName, String password, String role, String email) {
+    public User(String userName, String password, String role) {
         this.userName = userName;
         this.password = password;
         this.role = role;
-        this.email = email;
     }
 
     @Override
@@ -94,7 +89,4 @@ public class User {
         this.role = role;
     }
 
-    public String getEmail() {
-        return email;
-    }
 }

@@ -33,7 +33,7 @@ public class BootStrapData implements CommandLineRunner {
         publisher.setCity("St Petersburg");
         publisher.setState("FL");
 
-        User admin = new User("admin","admin", "ADMIN","admin@test.pl");
+        User admin = new User("admin","admin", "ADMIN");
         admin.setActive(true);
         userRepository.save(admin);
         publisherRepository.save(publisher);

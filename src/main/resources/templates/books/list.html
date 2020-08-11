@@ -6,7 +6,9 @@
 </head>
 <body>
 <h1>Book List</h1>
-
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
 <table>
     <tr>
         <th>ID</th>

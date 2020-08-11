@@ -2,12 +2,15 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Hello World</title>
+    <title>JaceBook</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
 <h3>Witam państwa</h3>
 <h2>Tutaj będzie strona główna naszej stronki, wyświatlane postu czy coś</h2>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
 <p><a th:href="@{/authors}">Tutaj</a> znajdziesz listę autorów</p>
 <p><a th:href="@{/books}">Tutaj</a> znajdziesz listę książek</p>
 </body>

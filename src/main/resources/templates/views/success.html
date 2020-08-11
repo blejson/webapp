@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Hello World</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
-$END$
+<h3>Brawo! Udało ci się zarejestrować</h3>
+<p>Kliknij <a th:href="@{/login}">tutaj</a> aby się zalogować</p>
 </body>
 </html>
