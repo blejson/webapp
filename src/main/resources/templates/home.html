@@ -11,7 +11,24 @@
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
 </form>
-<p><a th:href="@{/authors}">Tutaj</a> znajdziesz listę autorów</p>
-<p><a th:href="@{/books}">Tutaj</a> znajdziesz listę książek</p>
+
+<form th:action="@{/home}" th:object="${postMessage}" method="post">
+    <div class="form-group">
+        <label for="message" class="form-control-label">Message</label>
+        <input type="text" class="form-control" th:field="*{message}" id="message"/>
+    </div>
+    <input type="submit" value="Submit" class="btn btn-primary"/>
+</form>
+
+<table>
+    <tr>
+        <th>Message</th>
+        <th>User</th>
+    </tr>
+    <tr th:each="post : ${posts}">
+        <td th:text="${post.message}">123</td>
+        <td th:text="${post.author.userName}">chuj</td>
+    </tr>
+</table>
 </body>
 </html>

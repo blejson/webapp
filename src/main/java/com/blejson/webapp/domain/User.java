@@ -1,6 +1,8 @@
 package com.blejson.webapp.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Blejson on 14.07.2020
@@ -16,6 +18,13 @@ public class User {
     private String role;
     private boolean active;
     public User() {
+    }
+    @OneToMany
+    @JoinColumn(name = "author_id")
+    private Set<PostMessage> postMessages = new HashSet<>();
+
+    public Set<PostMessage> getPostMessages() {
+        return postMessages;
     }
 
     public User(String userName, String password, String role) {
