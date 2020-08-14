@@ -4,6 +4,7 @@ import com.blejson.webapp.domain.PostMessage;
 import com.blejson.webapp.domain.User;
 import com.blejson.webapp.repositories.PostMessageRepository;
 import com.blejson.webapp.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +37,14 @@ public class HomePageController {
 
     @PostMapping(value = {"/home","","/"})
     public String addPostMessage(PostMessage postMessage, Model model){
-        Optional<User> user = userRepository.findByUserName("admin");
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+        if (principal instanceof MyUserDetails) {
+            username = ((MyUserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        Optional<User> user = userRepository.findByUserName(username);
         user.ifPresent(postMessage::setAuthor);
         postMessageRepository.save(postMessage);
         model.addAttribute("posts", postMessageRepository.findAll());
