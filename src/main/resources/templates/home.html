@@ -27,7 +27,16 @@
     </tr>
     <tr th:each="post : ${posts}">
         <td th:text="${post.message}">123</td>
-        <td th:text="${post.author.userName}">chuj</td>
+        <td th:text="${post.author.userName}"></td>
+    </tr>
+</table>
+<h3>Lista użytkowników:</h3>
+<table>
+    <tr>
+        <th>Username</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.userName}">123</td>
     </tr>
 </table>
 </body>
