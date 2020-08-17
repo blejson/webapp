@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -24,6 +25,20 @@ public class HomePageController {
     public HomePageController(PostMessageRepository postMessageRepository, UserRepository userRepository) {
         this.postMessageRepository = postMessageRepository;
         this.userRepository = userRepository;
+    }
+
+    @GetMapping("/user/{userName}")
+    public String getUserPage(@PathVariable("userName") String userName, Model model){
+        Optional<User> user = userRepository.findByUserName(userName);
+        User user1 = user.stream().findFirst().orElse(null);
+        if(user.isPresent()){
+            model.addAttribute("user", user1);
+            return "/views/user";
+        }
+        model.addAttribute("posts", postMessageRepository.findAll());
+        model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("postMessage", new PostMessage());
+        return "redirect:/home";
     }
 
     @GetMapping(value= {"/home", "","/"})

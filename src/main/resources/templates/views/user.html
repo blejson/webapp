@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>JaceBook</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
-$END$
+<h2>Tutaj będzie strona użytkownika</h2>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+
+<h3>Info o użytkowniku:</h3>
+<p><span th:text="${user.userName}"></span></p>
 </body>
 </html>
