@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>JaceBook</title>
+    <title th:text="${user.userName}">JaceBook</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
@@ -13,5 +13,14 @@
 
 <h3>Info o użytkowniku:</h3>
 <p><span th:text="${user.userName}"></span></p>
+<h3>Posty:</h3>
+<table>
+    <tr>
+        <th>Message</th>
+    </tr>
+    <tr th:each="post : ${posts}">
+        <td th:text="${post.message}">123</td>
+    </tr>
+</table>
 </body>
 </html>

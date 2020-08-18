@@ -27,7 +27,7 @@ public class BootStrapData implements CommandLineRunner {
         postMessageRepository.save(postMessage);
         PostMessage postMessage1 = new PostMessage("Nazywam się Jacek Bleja, to jest mój testowy post", admin);
         postMessageRepository.save(postMessage1);
-        PostMessage postMessage2 = new PostMessage("Ej, kiedy melanż?", admin);
+        PostMessage postMessage2 = new PostMessage("RAZ DWA TRZY", admin);
         postMessageRepository.save(postMessage2);
 
         System.out.println("Server ready, now you can start testing your app!");

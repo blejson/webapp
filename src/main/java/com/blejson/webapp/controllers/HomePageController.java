@@ -32,6 +32,7 @@ public class HomePageController {
         Optional<User> user = userRepository.findByUserName(userName);
         User user1 = user.stream().findFirst().orElse(null);
         if(user.isPresent()){
+            model.addAttribute("posts", postMessageRepository.findByAuthor(user1));
             model.addAttribute("user", user1);
             return "/views/user";
         }
