@@ -32,14 +32,14 @@ public class HomePageController {
         Optional<User> user = userRepository.findByUserName(userName);
         User user1 = user.stream().findFirst().orElse(null);
         if(user.isPresent()){
-            model.addAttribute("posts", postMessageRepository.findByAuthor(user1));
+            model.addAttribute("posts", postMessageRepository.findByAuthor(user1)); //finds all posts of user
             model.addAttribute("user", user1);
             return "/views/user";
         }
         model.addAttribute("posts", postMessageRepository.findAll());
         model.addAttribute("users", userRepository.findAll());
         model.addAttribute("postMessage", new PostMessage());
-        return "redirect:/home";
+        return "redirect:/home";    //if parameter is invalid the user is redirected to homepage
     }
 
     @GetMapping(value= {"/home", "","/"})
