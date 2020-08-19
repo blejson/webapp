@@ -2,6 +2,7 @@ package com.blejson.webapp.domain;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -17,6 +18,17 @@ public class User {
     private String password;
     private String role;
     private boolean active;
+    @ManyToMany
+    private List<User> friends;
+
+    public List<User> getFriends() {
+        return friends;
+    }
+
+    public void addFriend(User friend) {
+        this.friends.add(friend);
+    }
+
     public User() {
     }
     @OneToMany
