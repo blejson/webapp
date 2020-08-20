@@ -40,27 +40,6 @@ public class HomePageController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/user/{userName}")
-    public String getUserPage(@PathVariable("userName") String userName, Model model){
-        Optional<User> user = userRepository.findByUserName(userName);
-        User user1 = user.stream().findFirst().orElse(null);
-        if(user.isPresent()){
-            String role = "";
-            List<User> friends = user1.getFriends();
-            if(friends.contains(getCurrentUser())) role = "friend";
-            else if(getCurrentUser().equals(user1)) role = "you";
-            else role = "stranger";
-            model.addAttribute("posts", postMessageRepository.findByAuthor(user1)); //finds all posts of user
-            model.addAttribute("user", user1);
-            model.addAttribute("role", role);
-            return "/views/user";
-        }
-        model.addAttribute("posts", postMessageRepository.findAll());
-        model.addAttribute("users", userRepository.findAll());
-        model.addAttribute("postMessage", new PostMessage());
-        return "redirect:/home";    //if parameter is invalid the user is redirected to homepage
-    }
-
     @GetMapping(value= {"/home", "","/"})
     public String getHomePage(Model model){
         model.addAttribute("posts", postMessageRepository.findAll());
