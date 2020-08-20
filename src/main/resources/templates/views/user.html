@@ -6,17 +6,19 @@
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
-<h2>Tutaj będzie strona użytkownika</h2>
+<h2>Strona użytkownika</h2>
+<p><a th:href="@{/home}">JaceBook</a></p>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
 </form>
 
 <h3>Info o użytkowniku:</h3>
-<p><span th:text="${user.userName}"></span></p>
-<p><span th:text="${role}"></span></p>
+<p>Nazwa: <span th:text="${user.userName}"></span></p>
+<p>Rola dla ciebie: <span th:text="${role}"></span></p>
 <form th:action="@{/user/{path}(path=${user.userName})}" th:if="${role == 'stranger'}" method="post">
     <input type="submit" value="Dodaj użytkownika"/>
 </form>
+<span th:unless="${role == 'stranger'}">
 <h3>Posty:</h3>
 <table>
     <tr>
@@ -26,5 +28,7 @@
         <td th:text="${post.message}"></td>
     </tr>
 </table>
+</span>
+<span th:if="${role == 'stranger'}">Musisz być znajomym aby wyświetlić posty tej osoby</span>
 </body>
 </html>
