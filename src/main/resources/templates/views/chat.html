@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <title>Chat</title>
 </head>
-<body>
+<body onload="connect()">
 <div>
-    <label>Your message:</label><input type="text"/>
-    <button>Send</button>
-    <p></p>
+    <label>User:</label><input id="user" type="text"/><br>
+    <label>Your message:</label><input id="messageToSend" type="text"/><br>
+    <button onclick="sendMessage()">Send</button>
+    <p id="response"></p>
 </div>
-
+<script src="chat/js.js"></script>
+<script src="chat/stomp.js"></script>
 </body>
 </html>
