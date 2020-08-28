@@ -20,7 +20,7 @@ function connect(){
 
 function sendMessage(){
     var messageToSend = document.getElementById('messageToSend').value;
-    var user = document.getElementById('user').value;
+    //var user = document.getElementById('user').value;
     client.send("/app/chat", {}, JSON.stringify({'value': messageToSend, 'user': user}) );
     document.getElementById('messageToSend').value = "";
 }

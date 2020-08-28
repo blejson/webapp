@@ -1,16 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Chat</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body onload="connect()">
 <div>
-    <label>User:</label><input id="user" type="text"/><br>
+
     <label>Your message:</label><input id="messageToSend" type="text"/><br>
     <button onclick="sendMessage()">Send</button>
     <p id="response"></p>
 </div>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var user = /*[[${user}]]*/ 'XD';
+/*]]>*/
+</script>
 <script src="chat/js.js"></script>
 <script src="chat/stomp.js"></script>
 </body>

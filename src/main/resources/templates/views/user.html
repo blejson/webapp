@@ -19,6 +19,7 @@
     <input type="submit" value="Dodaj użytkownika"/>
 </form>
 <span th:unless="${role == 'stranger'}">
+    <p><a th:href="@{/c}">Napisz wiadomość</a></p>
 <h3>Posty:</h3>
 <table>
     <tr>
