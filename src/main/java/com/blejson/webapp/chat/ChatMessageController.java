@@ -16,8 +16,8 @@ public class ChatMessageController {
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
-    @MessageMapping("/chat")
-    public void sendMessage(ChatMessage chatMessage){
-        simpMessagingTemplate.convertAndSend("/topic/messages", chatMessage);
+    @MessageMapping("/chat/{id}")
+    public void sendMessage(@DestinationVariable String id, ChatMessage chatMessage){
+       simpMessagingTemplate.convertAndSend("/topic/messages/"+id, chatMessage);
     }
 }

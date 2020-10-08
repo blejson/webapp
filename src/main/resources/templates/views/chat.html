@@ -17,7 +17,12 @@
 var user = /*[[${user}]]*/ 'XD';
 /*]]>*/
 </script>
-<script src="js/js.js"></script>
-<script src="js/stomp.js"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var id = /*[[${id}]]*/ '0';
+/*]]>*/
+</script>
+<script th:src="@{/js/js.js}"></script>
+<script th:src="@{/js/stomp.js}"></script>
 </body>
 </html>

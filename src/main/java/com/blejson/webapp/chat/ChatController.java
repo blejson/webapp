@@ -22,9 +22,8 @@ public class ChatController {
     public ChatController(UserRepository userRepository){
         this.userRepository = userRepository;
     }
-
-    @GetMapping("/c")
-    public String getChatPage(Model model){
+    @GetMapping("/m/{id}")
+    public String getChatPage(@PathVariable("id") String id, Model model){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username;
         if (principal instanceof MyUserDetails) {
@@ -33,6 +32,7 @@ public class ChatController {
             username = principal.toString();
         }
         model.addAttribute("user",username);
+        model.addAttribute("id",id);
         return "views/chat";
     }
 }

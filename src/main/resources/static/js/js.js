@@ -12,7 +12,7 @@ function showMessage(value, user){
 function connect(){
     client = Stomp.client('ws://localhost:8080/chat');
     client.connect({}, function (frame) {
-        client.subscribe("/topic/messages", function(message){
+        client.subscribe("/topic/messages/"+id, function(message){
             showMessage(JSON.parse(message.body).value, JSON.parse(message.body).user)
         });
     })
@@ -21,6 +21,6 @@ function connect(){
 function sendMessage(){
     var messageToSend = document.getElementById('messageToSend').value;
     //var user = document.getElementById('user').value;
-    client.send("/app/chat", {}, JSON.stringify({'value': messageToSend, 'user': user}) );
+    client.send("/app/chat/"+id, {}, JSON.stringify({'value': messageToSend, 'user': user}) );
     document.getElementById('messageToSend').value = "";
 }
