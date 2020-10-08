@@ -1,7 +1,9 @@
 package com.blejson.webapp.controllers;
 
+import com.blejson.webapp.domain.Conversation;
 import com.blejson.webapp.domain.PostMessage;
 import com.blejson.webapp.domain.User;
+import com.blejson.webapp.repositories.ConversationRepository;
 import com.blejson.webapp.repositories.PostMessageRepository;
 import com.blejson.webapp.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,9 +23,11 @@ import java.util.Optional;
 public class UserPageController {
     private final PostMessageRepository postMessageRepository;
     private final UserRepository userRepository;
-    public UserPageController(PostMessageRepository postMessageRepository, UserRepository userRepository) {
+    private final ConversationRepository conversationRepository;
+    public UserPageController(PostMessageRepository postMessageRepository, UserRepository userRepository, ConversationRepository conversationRepository) {
         this.postMessageRepository = postMessageRepository;
         this.userRepository = userRepository;
+        this.conversationRepository = conversationRepository;
     }
 
     public User getCurrentUser(){
@@ -68,6 +72,9 @@ public class UserPageController {
         user2.addFriend(user1);
         userRepository.save(user1);
         userRepository.save(user2);
+
+        Conversation conversation = new Conversation(user1, user2); //TODO: check if doesn't exist
+        conversationRepository.save(conversation);
 
         String role = "";
         List<User> friends = user1.getFriends();

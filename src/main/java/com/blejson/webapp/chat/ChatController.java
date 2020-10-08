@@ -3,10 +3,12 @@ package com.blejson.webapp.chat;
 import com.blejson.webapp.controllers.MyUserDetails;
 import com.blejson.webapp.domain.User;
 import com.blejson.webapp.repositories.UserRepository;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Optional;
 
