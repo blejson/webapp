@@ -1,9 +1,10 @@
 package com.blejson.webapp.chat;
 
 import com.blejson.webapp.controllers.MyUserDetails;
+import com.blejson.webapp.domain.Conversation;
 import com.blejson.webapp.domain.User;
+import com.blejson.webapp.repositories.ConversationRepository;
 import com.blejson.webapp.repositories.UserRepository;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +19,11 @@ import java.util.Optional;
 @Controller
 public class ChatController {
     private final UserRepository userRepository;
+    private final ConversationRepository conversationRepository;
 
-    public ChatController(UserRepository userRepository){
+    public ChatController(UserRepository userRepository, ConversationRepository conversationRepository){
         this.userRepository = userRepository;
+        this.conversationRepository = conversationRepository;
     }
     @GetMapping("/m/{id}")
     public String getChatPage(@PathVariable("id") String id, Model model){
@@ -31,8 +34,14 @@ public class ChatController {
         } else {
             username = principal.toString();
         }
-        model.addAttribute("user",username);
-        model.addAttribute("id",id);
-        return "views/chat";
+        Optional<User> user = userRepository.findByUserName(username);
+        User currentUser = user.stream().findFirst().orElse(null);
+        Optional<Conversation> conversation = conversationRepository.findByUserAndId(currentUser, Long.parseLong(id));
+        if(conversation.isPresent()){
+            model.addAttribute("user",username);
+            model.addAttribute("id",id);
+            return "views/chat";
+        }
+        return "redirect:/home";
     }
 }

@@ -18,4 +18,7 @@ public interface ConversationRepository extends JpaRepository<Conversation, Long
 
     @Query("select c from Conversation c where (c.user1 = :user1 and c.user2 = :user2) or (c.user1 = :user2 and c.user2 = :user1)")
     Optional<Conversation> findByUsers(@Param("user1") User user1, @Param("user2") User user2);
+
+    @Query("select c from Conversation c where (c.user1 = :user and c.id = :id) or (c.user2 = :user and c.id = :id)")
+    Optional<Conversation> findByUserAndId(@Param("user") User user, @Param("id") Long id);
 }
