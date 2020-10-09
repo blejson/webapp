@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +47,14 @@ public class UserPageController {
     public String getUserPage(@PathVariable("userName") String userName, Model model){
         Optional<User> user = userRepository.findByUserName(userName);
         User user1 = user.stream().findFirst().orElse(null);
+        User currentUser = getCurrentUser();
         if(user.isPresent()){
+            Optional<Conversation> conversationOptional = conversationRepository.findByUsers(user1, currentUser);
+            Long id = 0L;
+            if(conversationOptional.isPresent()) {
+                Conversation conversation = conversationOptional.stream().findFirst().orElse(null);
+                id = conversation.getId();
+            }
             String role = "";
             List<User> friends = user1.getFriends();
             if(friends.contains(getCurrentUser())) role = "friend";
@@ -55,6 +63,7 @@ public class UserPageController {
             model.addAttribute("posts", postMessageRepository.findByAuthor(user1)); //finds all posts of user
             model.addAttribute("user", user1);
             model.addAttribute("role", role);
+            model.addAttribute("id", id);
             return "/views/user";
         }
         model.addAttribute("posts", postMessageRepository.findAll());
@@ -84,6 +93,7 @@ public class UserPageController {
         model.addAttribute("posts", postMessageRepository.findByAuthor(user1)); //finds all posts of user
         model.addAttribute("user", user1);
         model.addAttribute("role", role);
+        model.addAttribute("id", conversation.getId());
         return "/views/user";
     }
 }

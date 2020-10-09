@@ -27,6 +27,9 @@ public class Conversation {
         this.user2 = user2;
     }
 
+    public Conversation() {
+    }
+
     public Conversation(User user1, User user2) {
         this.user1 = user1;
         this.user2 = user2;
